@@ -4,6 +4,8 @@ import pandas as pd
 
 currentX = 0
 currentY = 0
+currentAim = 0
+
 inputArray = []
 
 def readFile(fileName):
@@ -19,10 +21,12 @@ for row in inputArray:
     match row[0]:
         case 'forward':
             currentX+=int(row[1])
+            currentY+=int(row[1])*currentAim
+            
         case 'up':
-            currentY-=int(row[1])
+            currentAim-=int(row[1])
         case 'down':
-            currentY+=int(row[1])
+            currentAim+=int(row[1])
         case _:
             print("Can't match value to known cases")
 
