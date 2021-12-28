@@ -35,19 +35,65 @@ for row in newInputArray.transpose():
         else:
             countOne+=1
     if countZero>countOne:
-        gammaRate +=str(0)
+        gammaRate +='0'
     elif countOne>countZero:
-        gammaRate +=str(1)
+        gammaRate +='1'
     else:
         print('No bueno')
 
-
 epsilonRate =''
-for digit in range(len(gammaRate)):
-    if int(gammaRate[digit]) == 0:
-        epsilonRate+='1'
-    else:
-        epsilonRate+='0'
+
+def invertBinary(inputData):
+    result = ''
+    for digit in range(len(gammaRate)):
+        if int(gammaRate[digit]) == 0:
+            result+='1'
+        else:
+            result+='0'
+    return result
+
+epsilonRate = invertBinary(gammaRate)
+powerConsumption = (int(gammaRate,2)*(int(epsilonRate,2)))
+print(powerConsumption)
+
+oxygenRating = []
 
 
-print((int(gammaRate,2)*(int(epsilonRate,2))))
+
+def filterDownBasedOnPopularity(inputFile,columnNumber):
+    inputFile = np.array(inputFile)
+    countZero=0
+    countOne=0
+    outputFile = []
+    transposedinput = inputFile.transpose()
+    firstColumn = transposedinput[columnNumber]
+    a = 1
+    for elem in firstColumn:
+        if elem == 0:
+            countZero+=1
+        else:
+            countOne+=1
+    print('Count zero: ' + str(countZero))
+    print('Count one: ' + str(countOne))
+
+    if countZero>countOne:
+        for rowProper in newInputArray:
+            if rowProper[0] == 0:
+                outputFile.append(rowProper)
+    elif countOne>countZero:
+        for rowProper in newInputArray:
+            if rowProper[0] == 1:
+                outputFile.append(rowProper)
+    elif countOne == countZero:
+        print('zeros and ones match, do something')
+    return outputFile
+
+oxygenRating = filterDownBasedOnPopularity(newInputArray,0)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,1)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,2)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,3)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,4)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,5)
+oxygenRating = filterDownBasedOnPopularity(oxygenRating,6)
+
+#Day 3 part 2. Not done
