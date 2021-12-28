@@ -2,10 +2,9 @@ from typing import List
 import numpy as np 
 import pandas as pd
 
-
-
 totalMoves = 0
 listoflists = []
+
 def readFile(fileName):
         fileObj = open(fileName, "r") #opens the file in read mode
         words = fileObj.read().splitlines() #puts the file into an array
@@ -34,16 +33,12 @@ def horizontalMove(inputX,variableToCheck):
                 'check next element'
                 nextX = positionX
                 nextY = positionY+1
-                # print('Current: ' + str(x[positionX][positionY]))
-                # print('Next: ' + str(x[nextX][nextY]))
                 nextValue = inputX[nextX][nextY]
 
             else:
                 'check first element'
                 nextX = positionX
                 nextY = 0
-                # print('Current: ' + str(x[positionX][positionY]))
-                # print('Next: ' + str(x[nextX][nextY]))
                 nextValue = inputX[nextX][nextY]
 
             if nextValue == 0 and elem == variableToCheck:
@@ -52,7 +47,6 @@ def horizontalMove(inputX,variableToCheck):
                 totalMoves+=1
             columnCounter+=1
 
-        # x[positionX] = y[positionX]
         rowCounter+=1
     
     
@@ -72,15 +66,15 @@ for row in readFile('input.txt'):
 
 inputFile = listoflists
 
-count = 1
+count = 1 #Starts at 1 to match the exercise result
 numIter = 10000
 
 while count < numIter:
     
     inputFile = horizontalMove(inputFile,1)
     inputFile = verticalMove(inputFile)
-    print(totalMoves)
     print('Total Moves: ' + str(totalMoves) + ' Iteration: ' + str(count))
+    
     if totalMoves == 0:
         break
     totalMoves = 0
